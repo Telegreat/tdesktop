@@ -443,7 +443,7 @@ int Inner::refreshInlineRows(PeerData *queryPeer, UserData *bot, const CacheEntr
 	_inlineBot = bot;
 	_inlineQueryPeer = queryPeer;
 	refreshSwitchPmButton(entry);
-	auto clearResults = [this, entry]() {
+	auto clearResults = [entry]() {
 		if (!entry) {
 			return true;
 		}

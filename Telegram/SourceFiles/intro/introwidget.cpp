@@ -104,7 +104,7 @@ void Widget::createLanguageLink() {
 			this,
 			object_ptr<Ui::LinkButton>(this, text));
 		_changeLanguage->hide(anim::type::instant);
-		_changeLanguage->entity()->setClickedCallback([this, languageId] {
+		_changeLanguage->entity()->setClickedCallback([languageId] {
 			Lang::CurrentCloudManager().switchToLanguage(languageId);
 		});
 		_changeLanguage->toggle(!_resetAccount, anim::type::normal);
@@ -118,7 +118,7 @@ void Widget::createLanguageLink() {
 		createLink(Lang::GetOriginalValue(lng_switch_to_this), defaultId);
 	} else if (!suggestedId.isEmpty() && suggestedId != currentId) {
 		LOG(("createLanguageLink"));
-		request(MTPlangpack_GetStrings(MTP_string(suggestedId), MTP_vector<MTPstring>(1, MTP_string("lng_switch_to_this")))).done([this, suggestedId, createLink](const MTPVector<MTPLangPackString> &result) {
+		request(MTPlangpack_GetStrings(MTP_string(suggestedId), MTP_vector<MTPstring>(1, MTP_string("lng_switch_to_this")))).done([suggestedId, createLink](const MTPVector<MTPLangPackString> &result) {
 			auto strings = Lang::Instance::ParseStrings(result);
 			auto it = strings.find(lng_switch_to_this);
 			if (it != strings.end()) {

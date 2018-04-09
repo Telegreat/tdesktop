@@ -141,7 +141,7 @@ Controller::ColumnLayout Controller::computeColumnLayout() const {
 	auto bodyWidth = window()->bodyWidget()->width();
 	auto dialogsWidth = 0, chatWidth = 0, thirdWidth = 0;
 
-	auto useOneColumnLayout = [this, bodyWidth] {
+	auto useOneColumnLayout = [bodyWidth] {
 		auto minimalNormal = st::columnMinimalWidthLeft
 			+ st::columnMinimalWidthMain;
 		if (bodyWidth < minimalNormal) {

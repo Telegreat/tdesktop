@@ -912,7 +912,7 @@ void MainWidget::cancelUploadLayer(not_null<HistoryItem*> item) {
 
 void MainWidget::deletePhotoLayer(PhotoData *photo) {
 	if (!photo) return;
-	Ui::show(Box<ConfirmBox>(lang(lng_delete_photo_sure), lang(lng_box_delete), base::lambda_guarded(this, [this, photo] {
+	Ui::show(Box<ConfirmBox>(lang(lng_delete_photo_sure), lang(lng_box_delete), base::lambda_guarded(this, [photo] {
 		Ui::hideLayer();
 
 		auto me = App::self();
@@ -1666,12 +1666,12 @@ void MainWidget::documentLoadFailed(FileLoader *loader, bool started) {
 	auto document = Auth().data().document(documentId);
 	if (started) {
 		auto failedFileName = loader->fileName();
-		Ui::show(Box<ConfirmBox>(lang(lng_download_finish_failed), base::lambda_guarded(this, [this, document, failedFileName] {
+		Ui::show(Box<ConfirmBox>(lang(lng_download_finish_failed), base::lambda_guarded(this, [document, failedFileName] {
 			Ui::hideLayer();
 			if (document) document->save(failedFileName);
 		})));
 	} else {
-		Ui::show(Box<ConfirmBox>(lang(lng_download_path_failed), lang(lng_download_path_settings), base::lambda_guarded(this, [this] {
+		Ui::show(Box<ConfirmBox>(lang(lng_download_path_failed), lang(lng_download_path_settings), base::lambda_guarded(this, [] {
 			Global::SetDownloadPath(QString());
 			Global::SetDownloadPathBookmark(QByteArray());
 			Ui::show(Box<DownloadPathBox>());

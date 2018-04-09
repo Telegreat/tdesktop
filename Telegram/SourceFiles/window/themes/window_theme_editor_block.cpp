@@ -134,7 +134,7 @@ void EditorBlock::Row::fillValueString() {
 			_valueString.append('a' + (code - 10));
 		}
 	};
-	auto addCode = [this, addHex](int code) {
+	auto addCode = [addHex](int code) {
 		addHex(code / 16);
 		addHex(code % 16);
 	};
@@ -459,7 +459,7 @@ void EditorBlock::enumerateRowsFrom(int top, Callback callback) const {
 int EditorBlock::resizeGetHeight(int newWidth) {
 	auto result = 0;
 	auto descriptionWidth = newWidth - st::themeEditorMargin.left() - st::themeEditorMargin.right();
-	enumerateRows([this, &result, descriptionWidth](Row &row) {
+	enumerateRows([&result, descriptionWidth](Row &row) {
 		row.setTop(result);
 
 		auto height = row.height();

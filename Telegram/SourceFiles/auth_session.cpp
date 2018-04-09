@@ -278,7 +278,7 @@ AuthSession::AuthSession(UserId userId)
 , _changelogs(Core::Changelogs::Create(this)) {
 	Expects(_userId != 0);
 
-	_saveDataTimer.setCallback([this] {
+	_saveDataTimer.setCallback([] {
 		Local::writeUserSettings();
 	});
 	subscribe(Messenger::Instance().passcodedChanged(), [this] {

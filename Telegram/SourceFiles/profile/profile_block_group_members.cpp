@@ -43,10 +43,10 @@ GroupMembersWidget::GroupMembersWidget(
 		notifyPeerUpdated(update);
 	}));
 
-	setRemovedCallback([this, peer](PeerData *selectedPeer) {
+	setRemovedCallback([this](PeerData *selectedPeer) {
 		removePeer(selectedPeer);
 	});
-	setSelectedCallback([this](PeerData *selectedPeer) {
+	setSelectedCallback([](PeerData *selectedPeer) {
 		Ui::showPeerProfile(selectedPeer);
 	});
 	setUpdateItemCallback([this](Item *item) {
